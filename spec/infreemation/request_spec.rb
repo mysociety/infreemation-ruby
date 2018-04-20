@@ -46,12 +46,18 @@ RSpec.describe Request do
     it 'must post remote request' do
       path = double(:path)
       allow(Request).to receive(:path).and_return(path)
-      expect(API).to receive(:post).with(path, attributes)
+      expect(API).to receive(:post).with(path, attributes).and_return({})
       request.save
     end
 
+    it 'must merge response into attributes' do
+      allow(API).to receive(:post).and_return(ref: '001')
+      expect { request.save }.to change { request.attributes[:ref] }.
+        from(nil).to('001')
+    end
+
     it 'must return true' do
-      allow(API).to receive(:post)
+      allow(API).to receive(:post).and_return({})
       expect(request.save).to eq true
     end
   end
