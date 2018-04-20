@@ -13,10 +13,12 @@ module Infreemation
       # Infreemation API is expecting raw POST data and the Ruby net/http core
       # library understandably does not support this.
       def get(path, params)
+        Infreemation.log :debug, "GET #{path} with #{params.inspect}"
         resource[path].post(with_auth(params), &parser)
       end
 
       def post(path, body)
+        Infreemation.log :debug, "POST #{path} with #{body.inspect}"
         resource[path].post(with_auth(body), &parser)
       end
 
@@ -35,6 +37,7 @@ module Infreemation
 
       def parser
         lambda do |response, _request, _result|
+          Infreemation.log :debug, response.body
           JSON.parse(response.body, symbolize_names: true)
         end
       end

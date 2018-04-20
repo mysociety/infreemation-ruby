@@ -12,6 +12,7 @@ module Infreemation
   ConfigurationError = Class.new(StandardError)
 
   class << self
+    attr_accessor :logger
     attr_writer :url, :api_key, :username
 
     def url
@@ -30,6 +31,10 @@ module Infreemation
       @username || raise(
         ConfigurationError, 'Infreemation.username not configured'
       )
+    end
+
+    def log(level, message)
+      logger&.send(level, name) { message }
     end
   end
 end
