@@ -63,4 +63,21 @@ RSpec.describe Infreemation do
       expect { Infreemation.username }.to raise_error(ConfigurationError)
     end
   end
+
+  describe '#log' do
+    let(:logger) { double(:logger) }
+
+    it 'must pass message to logger with correct level' do
+      Infreemation.logger = logger
+      expect(logger).to receive(:debug).with('Infreemation') do |&block|
+        expect(block.call).to eq 'my message'
+      end
+      Infreemation.log(:debug, 'my message')
+    end
+
+    it 'must not raise an exception when logger is nil' do
+      Infreemation.logger = nil
+      expect { Infreemation.log(:debug, 'my message') }.to_not raise_error
+    end
+  end
 end
