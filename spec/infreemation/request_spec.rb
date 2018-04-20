@@ -3,6 +3,12 @@
 require 'spec_helper'
 
 RSpec.describe Request do
+  describe '.path' do
+    it 'must be set' do
+      expect(Request.path).to eq '/foi/'
+    end
+  end
+
   describe '.create' do
     let(:attributes) { { requester: 'James T. Kirk' } }
     let(:request) { Request.new }

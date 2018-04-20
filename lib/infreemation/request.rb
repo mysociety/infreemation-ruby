@@ -6,6 +6,10 @@ module Infreemation
   #
   class Request
     class << self
+      def path
+        '/foi/'
+      end
+
       def create(attributes = {})
         new(attributes, &:save)
       end
