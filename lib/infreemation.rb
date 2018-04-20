@@ -6,6 +6,7 @@ require 'infreemation/version'
 # This module is the main entry point of the Gem
 #
 module Infreemation
+  require 'infreemation/api'
   require 'infreemation/request'
 
   ConfigurationError = Class.new(StandardError)

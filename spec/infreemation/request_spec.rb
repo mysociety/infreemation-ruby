@@ -20,6 +20,12 @@ RSpec.describe Request do
       end
       Request.create(attributes)
     end
+
+    it 'must return a Request' do
+      allow(Request).to receive(:new).and_return(request)
+      allow(request).to receive(:save)
+      expect(Request.create(attributes)).to be_a Request
+    end
   end
 
   describe '#initialize' do
@@ -37,7 +43,15 @@ RSpec.describe Request do
     let(:attributes) { { requester: 'Uhura' } }
     let(:request) { Request.new(attributes) }
 
+    it 'must post remote request' do
+      path = double(:path)
+      allow(Request).to receive(:path).and_return(path)
+      expect(API).to receive(:post).with(path, attributes)
+      request.save
+    end
+
     it 'must return true' do
+      allow(API).to receive(:post)
       expect(request.save).to eq true
     end
   end
