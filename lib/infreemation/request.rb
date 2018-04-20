@@ -23,6 +23,7 @@ module Infreemation
     end
 
     def save
+      API.post(self.class.path, attributes)
       true
     end
   end
