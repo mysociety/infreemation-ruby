@@ -13,6 +13,12 @@ module Infreemation
       def create(attributes = {})
         new(attributes, &:save)
       end
+
+      def where(options = {})
+        type = options.fetch(:rt).downcase.to_sym
+        requests_data = API.get(path, options).dig(type, :request) || []
+        requests_data.map { |attributes| new(attributes) }
+      end
     end
 
     attr_reader :attributes
