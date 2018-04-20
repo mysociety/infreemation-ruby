@@ -9,6 +9,13 @@ module Infreemation
   #
   class API
     class << self
+      # The #get method is doing a POST request. This is because the
+      # Infreemation API is expecting raw POST data and the Ruby net/http core
+      # library understandably does not support this.
+      def get(path, params)
+        resource[path].post(with_auth(params), &parser)
+      end
+
       def post(path, body)
         resource[path].post(with_auth(body), &parser)
       end

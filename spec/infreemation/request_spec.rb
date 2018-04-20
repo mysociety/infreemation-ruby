@@ -28,6 +28,31 @@ RSpec.describe Request do
     end
   end
 
+  describe '.where' do
+    let(:path) { double(:path) }
+    let(:options) { { rt: 'published' } }
+
+    before { allow(Request).to receive(:path).and_return(path) }
+
+    it 'must get remote requests' do
+      expect(API).to receive(:get).and_return({})
+      Request.where(options)
+    end
+
+    it 'must return a Array' do
+      allow(API).to receive(:get).and_return({})
+      expect(Request.where(options)).to be_an Array
+    end
+
+    it 'must map response to Requests' do
+      allow(API).to receive(:get).
+        and_return(published: { request: [{ ref: '001' }] })
+      request = Request.where(options).first
+      expect(request).to be_an Request
+      expect(request.attributes[:ref]).to eq '001'
+    end
+  end
+
   describe '#initialize' do
     it 'must assign attributes' do
       request = Request.new(requester: 'Spock')
