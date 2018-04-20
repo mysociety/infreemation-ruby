@@ -35,5 +35,9 @@ RSpec.describe 'create request' do
     it 'must return request' do
       is_expected.to be_a Request
     end
+
+    it 'must assign reference' do
+      expect(request.attributes[:ref]).to eq 'FOI/0001'
+    end
   end
 end

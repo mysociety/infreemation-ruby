@@ -22,5 +22,9 @@ RSpec.describe API do
     it 'must not raise error' do
       expect { API.post('/foi', body) }.to_not raise_error
     end
+
+    it 'must parse response' do
+      expect(API.post('/foi', body)).to eq(baz: 'qux')
+    end
   end
 end

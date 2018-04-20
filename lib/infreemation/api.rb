@@ -10,7 +10,7 @@ module Infreemation
   class API
     class << self
       def post(path, body)
-        resource[path].post(with_auth(body))
+        resource[path].post(with_auth(body), &parser)
       end
 
       private
@@ -24,6 +24,12 @@ module Infreemation
 
       def resource
         RestClient::Resource.new(Infreemation.url)
+      end
+
+      def parser
+        lambda do |response, _request, _result|
+          JSON.parse(response.body, symbolize_names: true)
+        end
       end
     end
   end
