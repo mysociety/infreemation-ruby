@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe 'create request' do
+  subject(:request) { Request.create(attributes) }
+
   let(:attributes) do
     {
       rt: 'create',
@@ -29,7 +31,6 @@ RSpec.describe 'create request' do
   end
 
   context 'without error' do
-    subject(:request) { Request.create(attributes) }
     let(:response) { File.new('spec/fixtures/create_request_response.json') }
 
     it 'must return request' do
@@ -38,6 +39,16 @@ RSpec.describe 'create request' do
 
     it 'must assign reference' do
       expect(request.attributes[:ref]).to eq 'FOI/0001'
+    end
+  end
+
+  context 'with authenciation error' do
+    let(:response) do
+      File.new('spec/fixtures/error_2.json')
+    end
+
+    it 'must raise error' do
+      expect { request }.to raise_error(AuthenticationError)
     end
   end
 end
