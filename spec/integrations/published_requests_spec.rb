@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe 'published requests' do
+  subject(:array) { Request.where(attributes) }
+
   let(:attributes) do
     {
       rt: 'published',
@@ -25,7 +27,6 @@ RSpec.describe 'published requests' do
   end
 
   context 'without error' do
-    subject(:array) { Request.where(attributes) }
     let(:response) do
       File.new('spec/fixtures/published_requests_response.json')
     end
@@ -38,6 +39,16 @@ RSpec.describe 'published requests' do
     it 'must return a collection of requests parsed from the response' do
       request_refs = subject.map { |request| request.attributes[:ref] }
       expect(request_refs).to match_array(%w[FOI-18/01 FOI-18/02])
+    end
+  end
+
+  context 'with authenciation error' do
+    let(:response) do
+      File.new('spec/fixtures/error_2.json')
+    end
+
+    it 'must raise error' do
+      expect { array }.to raise_error(AuthenticationError)
     end
   end
 end

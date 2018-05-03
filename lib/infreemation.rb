@@ -7,6 +7,7 @@ require 'infreemation/version'
 #
 module Infreemation
   require 'infreemation/api'
+  require 'infreemation/errors'
   require 'infreemation/request'
 
   ConfigurationError = Class.new(StandardError)
