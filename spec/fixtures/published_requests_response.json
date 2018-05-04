@@ -1,0 +1,83 @@
+{
+  "published": {
+    "request": [
+    {
+      "datecreated": "2018-01-01",
+        "dateclosed": "2018-01-04",
+        "datepublished": "2018-01-05",
+        "status": "Closed",
+        "outcome": "Provided in Full",
+        "category": "Waste and Recycling",
+        "keywords": "bins, waste, missed bins",
+        "timespend": {
+          "unit": "minutes",
+          "value": "120"
+        },
+        "costtorespond": {
+          "unit": "gbp",
+          "value": "50"
+        },
+        "subject": "Missed Bin Collections",
+        "requestbody": "Dear FOI team\nPlease treat this as a request under the FOI act. \nPlease can you tell me how much has the council spent on \n(a) general waste collection in 2016\n(b) recycling waste collection in 2016 and 2017\nThank you \nRedacted",
+        "history": {
+          "response": [
+          {
+            "responsebody": "Dear Redacted\nThis is an automated response and acknowledgement.\nYour request will be considered and you will receive the information requested within the statutory timescale of 20 working days as defined by the Freedom of Information Act 2000, subject to the information not being exempt or containing reference to a third party.",
+            "from": "authority",
+            "datetime": "2018-01-01 10:10:10"
+          },
+          {
+            "responsebody": "Dear Redacted\nThank you for your request for information, this has now been processed and the information that we hold is enclosed.\n(a) The total cost for general waste collection in 2016 was £123,113\n(b) 2016 - £90,218 and 2017 - £102,218",
+            "from": "authority",
+            "datetime": "2018-01-01 13:20:42"
+          }
+          ]
+        },
+        "ref": "FOI-18/01"
+    },
+    {
+      "datecreated": "2018-02-03",
+      "dateclosed": "2018-02-10",
+      "datepublished": "2018-02-11",
+      "status": "Closed",
+      "outcome": "Rejected - Exempt",
+      "category": "Business",
+      "keywords": "",
+      "timespend": {
+        "unit": "minutes",
+        "value": "30"
+      },
+      "costtorespond": {
+        "unit": "gbp",
+        "text": "12"
+      },
+      "subject": "Business Rates",
+      "requestbody": "Dear FOI team\nPlease treat this as a request under the FOI act. \nPlease can you tell me:\n(a) List all non-domestic properties and their addresses\n(b) The date the rate payer became liable for the bill\nThank you \nRedacted",
+      "exemptions": {
+        "exemption": "S(21) - Information already reasonably accessible"
+      }, "history": {
+        "response": [
+        {
+          "responsebody": "Dear Redacted\nThis is an automated response and acknowledgement.\nYour request will be considered and you will receive the information requested within the statutory timescale of 20 working days as defined by the Freedom of Information Act 2000, subject to the information not being exempt or containing reference to a third party.",
+          "from": "authority",
+          "datetime": "2018-02-03 12:11:11"
+        },
+        {
+          "responsebody": "Dear Redacted\nFurther to your request for Information it is not possible to provide the information you requested as it is covered by an Absolute Exemption.\nSection 21: Information already reasonably accessible.\nWe publish this information on our website. http://www.council.gov.uk\nI apologise that your request cannot be met and should you have any further queries or information needs in the future then please contact me.",
+          "from": "authority",
+          "datetime": "2018-02-03 15:00:10"
+        },
+        {
+          "responsebody": "Thank you",
+          "from": "customer",
+          "datetime": "2018-02-03 15:30:10"
+        }
+        ]
+      },
+      "ref": "FOI-18/02"
+    }
+    ],
+    "type": "FOI",
+    "generated": "2018-10-1 04:44:44"
+  }
+}
