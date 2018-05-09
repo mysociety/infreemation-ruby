@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe 'create request' do
-  subject(:request) { Request.create(attributes) }
+  subject(:request) { Request.create!(attributes) }
 
   let(:attributes) do
     {
