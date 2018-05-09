@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Ruby library for the Infreemation API.'
   spec.description   = 'Infreemation is a eCase management software system ' \
     'built specifically to manage FOI, EIR and SAR requests.'
-  spec.homepage      = 'https://github.com/mysociety/infreemation'
+  spec.homepage      = 'https://github.com/mysociety/infreemation-ruby'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the
