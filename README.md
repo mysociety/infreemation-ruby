@@ -1,8 +1,6 @@
 # Infreemation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/infreemation`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A Ruby client library for the [Infreemation](http://www.digital-interactive.com/products/infreemation) API from [Digital Interactive](http://www.digital-interactive.com). Infreemation is a eCase management software system built specifically to manage FOI, EIR and SAR requests. Currently this library only supports FOI requests.
 
 ## Installation
 
@@ -20,9 +18,43 @@ Or install it yourself as:
 
     $ gem install infreemation
 
+## Configuration
+
+If you're using Rails, add the following to `config/initializers/infreemation.rb`:
+
+``` ruby
+Infreemation.logger = Rails.logger
+Infreemation.url = ENV['INFREEMATION_URL']
+Infreemation.api_key = ENV['INFREEMATION_API_KEY']
+Infreemation.username = ENV['INFREEMATION_USERNAME']
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+### Creating requests
+
+```ruby
+Infreemation::Request.create!(
+  rt: 'create',
+  type: 'FOI',
+  requester: 'Fred Smith',
+  contact: 'fred@example.com',
+  contacttype: 'email',
+  subject: 'Missed Bins',
+  category: 'Waste',
+  body: 'Dear FOI team/nPlease treat this as a request under the FOI act etc'
+)
+```
+
+### Retrieving published requests
+
+```ruby
+Infreemation::Request.where(
+  rt: 'published',
+  startdate: '2018-01-01',
+  enddate: '2019-01-01'
+)
+```
 
 ## Development
 
