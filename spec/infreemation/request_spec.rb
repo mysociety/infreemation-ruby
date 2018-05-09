@@ -9,22 +9,22 @@ RSpec.describe Request do
     end
   end
 
-  describe '.create' do
+  describe '.create!' do
     let(:attributes) { { requester: 'James T. Kirk' } }
     let(:request) { Request.new }
 
-    it 'must initialise Request and call save' do
-      expect(request).to receive(:save)
+    it 'must initialise Request and call save!' do
+      expect(request).to receive(:save!)
       expect(Request).to receive(:new) do |&blk|
         blk.call(request)
       end
-      Request.create(attributes)
+      Request.create!(attributes)
     end
 
     it 'must return a Request' do
       allow(Request).to receive(:new).and_return(request)
-      allow(request).to receive(:save)
-      expect(Request.create(attributes)).to be_a Request
+      allow(request).to receive(:save!)
+      expect(Request.create!(attributes)).to be_a Request
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe Request do
     end
   end
 
-  describe '#save' do
+  describe '#save!' do
     let(:attributes) { { requester: 'Uhura' } }
     let(:request) { Request.new(attributes) }
 
@@ -72,18 +72,18 @@ RSpec.describe Request do
       path = double(:path)
       allow(Request).to receive(:path).and_return(path)
       expect(API).to receive(:post).with(path, attributes).and_return({})
-      request.save
+      request.save!
     end
 
     it 'must merge response into attributes' do
       allow(API).to receive(:post).and_return(ref: '001')
-      expect { request.save }.to change { request.attributes[:ref] }.
+      expect { request.save! }.to change { request.attributes[:ref] }.
         from(nil).to('001')
     end
 
     it 'must return true' do
       allow(API).to receive(:post).and_return({})
-      expect(request.save).to eq true
+      expect(request.save!).to eq true
     end
   end
 end
