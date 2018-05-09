@@ -10,8 +10,8 @@ module Infreemation
         '/foi/'
       end
 
-      def create(attributes = {})
-        new(attributes, &:save)
+      def create!(attributes = {})
+        new(attributes, &:save!)
       end
 
       def where(options = {})
@@ -28,7 +28,7 @@ module Infreemation
       yield self if block_given?
     end
 
-    def save
+    def save!
       @attributes.merge!(API.post(self.class.path, attributes))
       true
     end
