@@ -34,7 +34,7 @@ RSpec.describe API do
       end
     end
 
-    context 'authenication errors' do
+    context 'authentication invalid errors' do
       let(:response) { File.read('spec/fixtures/error_2.json') }
       specify { expect { subject }.to raise_error(AuthenticationError) }
     end

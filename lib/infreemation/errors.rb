@@ -12,7 +12,7 @@ module Infreemation
   GenericError = Class.new(Exception)
 
   ##
-  # An API authenication error
+  # An API authentication error
   #
   AuthenticationError = Class.new(Exception)
 
@@ -41,7 +41,7 @@ module Infreemation
   }.freeze
 
   ##
-  # This module is resposible for mapping error codes into the correct type to
+  # This module is responsible for mapping error codes into the correct type to
   # exception class
   #
   module Errors
