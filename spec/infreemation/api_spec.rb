@@ -46,6 +46,11 @@ RSpec.describe API do
       end
     end
 
+    context 'invalid FOI type errors' do
+      let(:response) { File.read('spec/fixtures/error_4.json') }
+      specify { expect { subject }.to raise_error(InvalidParameterError) }
+    end
+
     context 'missing requester errors' do
       let(:response) { File.read('spec/fixtures/error_5.json') }
       specify { expect { subject }.to raise_error(MissingParameterError) }
@@ -64,6 +69,26 @@ RSpec.describe API do
     context 'missing body errors' do
       let(:response) { File.read('spec/fixtures/error_8.json') }
       specify { expect { subject }.to raise_error(MissingParameterError) }
+    end
+
+    context 'missing rt errors' do
+      let(:response) { File.read('spec/fixtures/error_9.json') }
+      specify { expect { subject }.to raise_error(MissingParameterError) }
+    end
+
+    context 'authentication missing key errors' do
+      let(:response) { File.read('spec/fixtures/error_10.json') }
+      specify { expect { subject }.to raise_error(AuthenticationError) }
+    end
+
+    context 'authentication missing username errors' do
+      let(:response) { File.read('spec/fixtures/error_11.json') }
+      specify { expect { subject }.to raise_error(AuthenticationError) }
+    end
+
+    context 'request errors' do
+      let(:response) { File.read('spec/fixtures/error_12.json') }
+      specify { expect { subject }.to raise_error(RequestError) }
     end
 
     context 'other generic errors' do
