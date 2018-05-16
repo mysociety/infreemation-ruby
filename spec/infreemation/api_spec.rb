@@ -39,9 +39,11 @@ RSpec.describe API do
       specify { expect { subject }.to raise_error(AuthenticationError) }
     end
 
-    context 'request errors' do
+    context 'missing or invalid start date errors' do
       let(:response) { File.read('spec/fixtures/error_3.json') }
-      specify { expect { subject }.to raise_error(RequestError) }
+      specify do
+        expect { subject }.to raise_error(MissingOrInvalidParameterError)
+      end
     end
 
     context 'missing requester errors' do

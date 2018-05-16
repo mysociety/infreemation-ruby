@@ -31,9 +31,14 @@ module Infreemation
   #
   MissingParameterError = Class.new(Exception)
 
+  ##
+  # A missing or invalid parameter error
+  #
+  MissingOrInvalidParameterError = Class.new(Exception)
+
   ERROR_MAPPINGS = {
     2 => AuthenticationError,
-    3 => RequestError,
+    3 => MissingOrInvalidParameterError, # start date
     5 => MissingParameterError, # requester
     6 => MissingParameterError, # contact
     7 => MissingParameterError, # contacttype
