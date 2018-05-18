@@ -1,5 +1,11 @@
-sudo: false
 language: ruby
-rvm:
-  - 2.5.1
-before_install: gem install bundler -v 1.16.1
+rvm: 2.5.1
+cache: bundler
+sudo: false
+before_install:
+  - "echo '--colour' > ~/.rspec"
+  - gem install bundler
+  - gem update --system
+install: bundle install
+notifications:
+  email: false
