@@ -97,8 +97,23 @@ RSpec.describe API do
     end
 
     context 'response errors' do
-      let(:response) { 'invalid json' }
-      specify { expect { subject }.to raise_error(ResponseError) }
+      let(:response) { 'permission denied' }
+
+      it 'raises resonse error with response body' do
+        expect { subject }.to raise_error(
+          ResponseError, 'JSON invalid (permission denied)'
+        )
+      end
+    end
+
+    context 'long response errors' do
+      let(:response) { 'x' * 101 }
+
+      it 'trims response body' do
+        expect { subject }.to raise_error(
+          ResponseError, "JSON invalid (#{'x' * 100})"
+        )
+      end
     end
   end
 

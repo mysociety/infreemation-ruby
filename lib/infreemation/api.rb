@@ -47,7 +47,7 @@ module Infreemation
               raise Errors[data[:ref]], data[:error] if data[:status] == 'ERROR'
             end
           rescue JSON::ParserError
-            raise ResponseError, 'JSON invalid'
+            raise ResponseError, "JSON invalid (#{response.body[0...100]})"
           end
         end
       end
