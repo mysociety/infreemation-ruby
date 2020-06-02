@@ -9,37 +9,37 @@ module Infreemation
   ##
   # A generic error
   #
-  GenericError = Class.new(Exception)
+  GenericError = Class.new(RuntimeError)
 
   ##
   # An API authentication error
   #
-  AuthenticationError = Class.new(Exception)
+  AuthenticationError = Class.new(RuntimeError)
 
   ##
   # A request error
   #
-  RequestError = Class.new(Exception)
+  RequestError = Class.new(RuntimeError)
 
   ##
   # A response error
   #
-  ResponseError = Class.new(Exception)
+  ResponseError = Class.new(RuntimeError)
 
   ##
   # A missing parameter error
   #
-  MissingParameterError = Class.new(Exception)
+  MissingParameterError = Class.new(RuntimeError)
 
   ##
   # An invalid parameter error
   #
-  InvalidParameterError = Class.new(Exception)
+  InvalidParameterError = Class.new(RuntimeError)
 
   ##
   # A missing or invalid parameter error
   #
-  MissingOrInvalidParameterError = Class.new(Exception)
+  MissingOrInvalidParameterError = Class.new(RuntimeError)
 
   ERROR_MAPPINGS = {
     2 => AuthenticationError, # key or username invalid
