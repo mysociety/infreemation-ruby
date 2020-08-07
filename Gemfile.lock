@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    infreemation (0.2.1)
+    infreemation (0.2.2)
       json (~> 2.3)
       rest-client (~> 2.0.2)
 
