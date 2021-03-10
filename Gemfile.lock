@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     infreemation (0.2.2)
-      json (~> 2.3)
+      json (~> 2.5.1)
       rest-client (~> 2.1.0)
 
 GEM
@@ -21,7 +21,7 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     jaro_winkler (1.5.4)
-    json (2.3.1)
+    json (2.5.1)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
