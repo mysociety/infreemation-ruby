@@ -90,9 +90,9 @@ PLATFORMS
 DEPENDENCIES
   infreemation!
   pry
-  rake (~> 13.0)
-  rspec (~> 3.0)
+  rake
+  rspec
   rubocop
   rubocop-performance
   rubocop-rspec
-  webmock (~> 3.3.0)
+  webmock

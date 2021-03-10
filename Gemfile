@@ -6,9 +6,9 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'pry'
-gem 'rake', '~> 13.0'
-gem 'rspec', '~> 3.0'
+gem 'rake'
+gem 'rspec'
 gem 'rubocop', require: false
 gem 'rubocop-performance', require: false
 gem 'rubocop-rspec', require: false
-gem 'webmock', '~> 3.3.0'
+gem 'webmock'
