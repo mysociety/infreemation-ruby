@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'logger' do
+RSpec.describe 'logger', type: :feature do
   it 'must output log message to logger' do
     expect do
       Infreemation.logger = Logger.new($stdout)

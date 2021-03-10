@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'create request' do
+RSpec.describe 'create request', type: :feature do
   subject(:request) { Request.create!(attributes) }
 
   let(:attributes) do
@@ -33,9 +33,7 @@ RSpec.describe 'create request' do
   context 'without error' do
     let(:response) { File.new('spec/fixtures/create_request_response.json') }
 
-    it 'must return request' do
-      is_expected.to be_a Request
-    end
+    it { is_expected.to be_a Request }
 
     it 'must assign reference' do
       expect(request.attributes[:ref]).to eq 'FOI/0001'

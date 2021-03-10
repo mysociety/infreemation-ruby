@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe 'published requests' do
+RSpec.describe 'published requests', type: :feature do
   subject(:array) { Request.where(attributes) }
 
   let(:attributes) do
@@ -31,13 +31,11 @@ RSpec.describe 'published requests' do
       File.new('spec/fixtures/published_requests_response.json')
     end
 
-    it 'must return array' do
-      is_expected.to be_a Array
-      is_expected.to_not be_empty
-    end
+    it { is_expected.to be_an Array }
+    it { is_expected.not_to be_empty }
 
     it 'must return a collection of requests parsed from the response' do
-      request_refs = subject.map { |request| request.attributes[:ref] }
+      request_refs = array.map { |request| request.attributes[:ref] }
       expect(request_refs).to match_array(%w[FOI-18/01 FOI-18/02])
     end
   end

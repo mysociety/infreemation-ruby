@@ -5,74 +5,87 @@ require 'spec_helper'
 RSpec.describe Request do
   describe '.path' do
     it 'must be set' do
-      expect(Request.path).to eq '/foi/'
+      expect(described_class.path).to eq '/foi/'
     end
   end
 
   describe '.create!' do
     let(:attributes) { { requester: 'James T. Kirk' } }
-    let(:request) { Request.new }
+    let(:request) { described_class.new }
 
-    it 'must initialise Request and call save!' do
-      expect(request).to receive(:save!)
-      expect(Request).to receive(:new) do |&blk|
-        blk.call(request)
-      end
-      Request.create!(attributes)
+    it 'must initialise Request with attributes' do
+      allow(described_class).to receive(:new)
+      described_class.create!(attributes)
+      expect(described_class).to have_received(:new).with(attributes)
     end
 
-    it 'must return a Request' do
-      allow(Request).to receive(:new).and_return(request)
+    it 'must yield save! to Request' do
+      allow(described_class).to receive(:new).and_yield(request)
       allow(request).to receive(:save!)
-      expect(Request.create!(attributes)).to be_a Request
+      described_class.create!(attributes)
+      expect(request).to have_received(:save!)
+    end
+
+    it 'must return the Request' do
+      allow(described_class).to receive(:new).and_return(request)
+      expect(described_class.create!(attributes)).to eq request
     end
   end
 
   describe '.where' do
-    let(:path) { double(:path) }
+    let(:path) { '/path' }
     let(:options) { { rt: 'published' } }
 
-    before { allow(Request).to receive(:path).and_return(path) }
+    before { allow(described_class).to receive(:path).and_return(path) }
 
     it 'must get remote requests' do
-      expect(API).to receive(:get).and_return({})
-      Request.where(options)
+      allow(API).to receive(:get).and_return({})
+      described_class.where(options)
+      expect(API).to have_received(:get)
     end
 
     it 'must return a Array' do
       allow(API).to receive(:get).and_return({})
-      expect(Request.where(options)).to be_an Array
+      expect(described_class.where(options)).to be_an Array
     end
 
-    it 'must map response to Requests' do
-      allow(API).to receive(:get).
-        and_return(published: { request: [{ ref: '001' }] })
-      request = Request.where(options).first
-      expect(request).to be_an Request
-      expect(request.attributes[:ref]).to eq '001'
+    context 'with published requests response' do
+      subject(:request) { described_class.where(options).first }
+
+      before do
+        allow(API).to receive(:get).
+          and_return(published: { request: [{ ref: '001' }] })
+      end
+
+      it { is_expected.to be_a described_class }
+
+      it 'must map response attributes to Request' do
+        expect(request.attributes[:ref]).to eq '001'
+      end
     end
   end
 
   describe '#initialize' do
     it 'must assign attributes' do
-      request = Request.new(requester: 'Spock')
+      request = described_class.new(requester: 'Spock')
       expect(request.attributes[:requester]).to eq 'Spock'
     end
 
     it 'must yield control' do
-      expect { |block| Request.new(&block) }.to yield_control
+      expect { |block| described_class.new(&block) }.to yield_control
     end
   end
 
   describe '#save!' do
     let(:attributes) { { requester: 'Uhura' } }
-    let(:request) { Request.new(attributes) }
+    let(:request) { described_class.new(attributes) }
 
     it 'must post remote request' do
-      path = double(:path)
-      allow(Request).to receive(:path).and_return(path)
-      expect(API).to receive(:post).with(path, attributes).and_return({})
+      path = '/path'
+      allow(described_class).to receive(:path).and_return(path)
+      allow(API).to receive(:post).and_return({})
       request.save!
+      expect(API).to have_received(:post).with(path, attributes)
     end
 
     it 'must merge response into attributes' do

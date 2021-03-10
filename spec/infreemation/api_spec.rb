@@ -26,77 +26,89 @@ RSpec.describe API do
       expect { subject }.to raise_error(ResponseError)
     end
 
-    context 'non-errors' do
+    context 'without errors' do
       let(:response) { File.read('spec/fixtures/response_0.json') }
 
       it 'does not raise an error' do
-        expect { subject }.to_not raise_error
+        expect { subject }.not_to raise_error
       end
     end
 
-    context 'authentication invalid errors' do
+    context 'with authentication invalid errors' do
       let(:response) { File.read('spec/fixtures/error_2.json') }
+
       specify { expect { subject }.to raise_error(AuthenticationError) }
     end
 
-    context 'missing or invalid start date errors' do
+    context 'with missing or invalid start date errors' do
       let(:response) { File.read('spec/fixtures/error_3.json') }
+
       specify do
         expect { subject }.to raise_error(MissingOrInvalidParameterError)
       end
     end
 
-    context 'invalid FOI type errors' do
+    context 'with invalid FOI type errors' do
       let(:response) { File.read('spec/fixtures/error_4.json') }
+
       specify { expect { subject }.to raise_error(InvalidParameterError) }
     end
 
-    context 'missing requester errors' do
+    context 'with missing subject errors' do
       let(:response) { File.read('spec/fixtures/error_5.json') }
+
       specify { expect { subject }.to raise_error(MissingParameterError) }
     end
 
-    context 'missing contact errors' do
+    context 'with missing contact errors' do
       let(:response) { File.read('spec/fixtures/error_6.json') }
+
       specify { expect { subject }.to raise_error(MissingParameterError) }
     end
 
-    context 'missing contact type errors' do
+    context 'with missing contact type errors' do
       let(:response) { File.read('spec/fixtures/error_7.json') }
+
       specify { expect { subject }.to raise_error(MissingParameterError) }
     end
 
-    context 'missing body errors' do
+    context 'with missing body errors' do
       let(:response) { File.read('spec/fixtures/error_8.json') }
+
       specify { expect { subject }.to raise_error(MissingParameterError) }
     end
 
-    context 'missing rt errors' do
+    context 'with missing rt errors' do
       let(:response) { File.read('spec/fixtures/error_9.json') }
+
       specify { expect { subject }.to raise_error(MissingParameterError) }
     end
 
-    context 'authentication missing key errors' do
+    context 'with authentication missing key errors' do
       let(:response) { File.read('spec/fixtures/error_10.json') }
+
       specify { expect { subject }.to raise_error(AuthenticationError) }
     end
 
-    context 'authentication missing username errors' do
+    context 'with authentication missing username errors' do
       let(:response) { File.read('spec/fixtures/error_11.json') }
+
       specify { expect { subject }.to raise_error(AuthenticationError) }
     end
 
-    context 'request errors' do
+    context 'with request errors' do
       let(:response) { File.read('spec/fixtures/error_12.json') }
+
       specify { expect { subject }.to raise_error(RequestError) }
     end
 
-    context 'other generic errors' do
+    context 'with other generic errors' do
       let(:response) { File.read('spec/fixtures/error_n.json') }
+
       specify { expect { subject }.to raise_error(GenericError) }
     end
 
-    context 'response errors' do
+    context 'with response errors' do
       let(:response) { 'permission denied' }
 
       it 'raises resonse error with response body' do
@@ -106,7 +118,7 @@ RSpec.describe API do
       end
     end
 
-    context 'long response errors' do
+    context 'with long response errors' do
       let(:response) { 'x' * 101 }
 
       it 'trims response body' do
@@ -118,34 +130,36 @@ RSpec.describe API do
   end
 
   describe '.get' do
+    subject(:request) { described_class.get('/foi', params) }
+
     let(:params) { { rt: 'published' } }
     let(:response) { '{ "foo": "bar" }' }
-    subject { API.get('/foi', params) }
 
     include_examples 'errors'
 
     it 'must not raise error' do
-      expect { subject }.to_not raise_error
+      expect { request }.not_to raise_error
     end
 
     it 'must parse response' do
-      expect(subject).to eq(foo: 'bar')
+      expect(request).to eq(foo: 'bar')
     end
   end
 
   describe '.post' do
+    subject(:request) { described_class.post('/foi', params) }
+
     let(:params) { { requester: 'Kirk' } }
     let(:response) { '{ "baz": "qux" }' }
-    subject { API.post('/foi', params) }
 
     include_examples 'errors'
 
     it 'must not raise error' do
-      expect { subject }.to_not raise_error
+      expect { request }.not_to raise_error
     end
 
     it 'must parse response' do
-      expect(subject).to eq(baz: 'qux')
+      expect(request).to eq(baz: 'qux')
     end
   end
 end
