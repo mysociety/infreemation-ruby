@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
     'built specifically to manage FOI, EIR and SAR requests.'
   spec.homepage      = 'https://github.com/mysociety/infreemation-ruby'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.2.0')
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'json', '~> 2.5.1'
+  spec.add_dependency 'json', '~> 2.5'
   spec.add_dependency 'rest-client', '~> 2.1.0'
 end
